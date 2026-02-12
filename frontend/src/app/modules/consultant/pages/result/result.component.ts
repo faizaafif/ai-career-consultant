@@ -13,34 +13,25 @@ import { ConsultantStateService } from '../../services/consultant-state.service'
 })
 export class ResultComponent implements OnInit {
 
-  analysisText: string | null = null;
-  confidenceLabel = '';
+  resultData: any = null;
+  loading = true;
 
   constructor(
     private state: ConsultantStateService,
-    private router: Router   // 🔑 REQUIRED
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     const result = this.state.getResult();
 
     if (result) {
-      this.analysisText = result;
-      this.confidenceLabel = this.calculateConfidence(result);
+      this.resultData = result;
+      this.loading = false;
     }
   }
 
-  private calculateConfidence(text: string): string {
-    return text.includes('Best Career Recommendation')
-      ? 'High Confidence Match'
-      : 'Moderate Confidence Match';
-  }
-
-  /**
-   * 🔁 Restart consultation properly
-   */
   restart(): void {
-    this.state.reset();                    // clear old data
-    this.router.navigate(['/consultant']); // 🔑 navigate to welcome
+    this.state.reset();
+    this.router.navigate(['/consultant']);
   }
 }

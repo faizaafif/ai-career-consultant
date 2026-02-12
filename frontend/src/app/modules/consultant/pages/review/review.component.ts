@@ -26,11 +26,12 @@ export class ReviewComponent {
   ) {}
 
   analyzeCareer(): void {
+
     const data = this.state.getConsultantData();
 
     /* ===============================
-       VALIDATION (EDGE CASES)
-       =============================== */
+       VALIDATION
+    =============================== */
     if (!data.skills || data.skills.length === 0) {
       alert('Please select at least one skill for better accuracy.');
       return;
@@ -44,19 +45,18 @@ export class ReviewComponent {
     this.loading = true;
 
     /* ===============================
-       AI API CALL (FIXED RESPONSE)
-       =============================== */
+       AI API CALL (UPDATED FORMAT)
+    =============================== */
     this.api.analyzeCareer(data).subscribe({
       next: (response: any) => {
-        /*
-          Backend response format:
-          {
-            success: true,
-            analysis: "Best Career Recommendation: ..."
-          }
-        */
-        this.state.setResult(response.analysis);
+
+        // 🔑 Store structured data from backend
+        // response = { success: true, data: {...} }
+        this.state.setResult(response.data);
+
         this.loading = false;
+
+        // Navigate to result page
         this.router.navigate(['/consultant/result']);
       },
       error: (error) => {

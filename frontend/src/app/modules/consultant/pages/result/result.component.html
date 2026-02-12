@@ -1,38 +1,61 @@
 <h1>Your Career Consultation Result</h1>
 
 <p class="intro">
-  Based on everything you shared, here is my honest assessment.
-  This recommendation considers your background, skills,
-  interests, personality, and constraints.
+  Based on everything you shared, here is the structured recommendation.
 </p>
 
-<!-- CONFIDENCE -->
-<div class="confidence" *ngIf="analysisText">
-  {{ confidenceLabel }}
+<div *ngIf="!loading; else loadingTemplate">
+
+  <!-- TOP CAREERS -->
+  <h2>Top Career Matches</h2>
+  <div *ngFor="let career of resultData?.topCareers">
+    <h3>{{ career.title }}</h3>
+    <p><strong>Confidence:</strong> {{ career.confidence }}</p>
+    <p>{{ career.reasoning }}</p>
+
+    <ul>
+      <li *ngFor="let step of career.learningRoadmap">
+        {{ step }}
+      </li>
+    </ul>
+
+    <hr />
+  </div>
+
+  <!-- ALTERNATIVES -->
+  <h2>Alternative Options</h2>
+  <div *ngFor="let alt of resultData?.alternatives">
+    <h4>{{ alt.title }}</h4>
+    <p>{{ alt.reasoning }}</p>
+  </div>
+
+  <hr />
+
+  <!-- REJECTED -->
+  <h2>Why Some Paths Were Rejected</h2>
+  <div *ngFor="let reject of resultData?.rejectedOptions">
+    <p>
+      <strong>{{ reject.career }}</strong> — {{ reject.reason }}
+    </p>
+  </div>
+
+  <hr />
+
+  <h3>What You Should Do Next</h3>
+  <ul>
+    <li>Start building the recommended skills</li>
+    <li>Look for internships or entry-level opportunities</li>
+    <li>Re-evaluate after gaining experience</li>
+  </ul>
+
+  <button class="primary" (click)="restart()">
+    Start New Consultation
+  </button>
+
 </div>
 
-<!-- AI RESULT -->
-<div class="report" *ngIf="analysisText; else loading">
-  <pre>{{ analysisText }}</pre>
-</div>
-
-<!-- LOADING STATE -->
-<ng-template #loading>
+<ng-template #loadingTemplate>
   <div class="report loading">
     Finalizing your career recommendation…
   </div>
 </ng-template>
-
-<hr />
-
-<!-- ACTION PLAN -->
-<h3>What You Should Do Next</h3>
-<ul>
-  <li>Start building the skills mentioned above</li>
-  <li>Look for internships or entry-level opportunities</li>
-  <li>Revisit this consultation after 3-6 months</li>
-</ul>
-
-<button class="primary" (click)="restart()">
-  Start New Consultation
-</button>

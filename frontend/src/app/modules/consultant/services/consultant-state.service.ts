@@ -84,7 +84,7 @@ export class ConsultantStateService {
      AI RESULT STORAGE
      =============================== */
 
-  setResult(result: string): void {
+  setResult(result: any): void {
     this.result = result;
   }
 

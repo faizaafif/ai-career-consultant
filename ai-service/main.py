@@ -19,11 +19,18 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
         content={"detail": exc.errors()}
     )
 
+def normalize_response(data):
+    for section in ["topCareers", "alternatives"]:
+        if section in data:
+            for item in data[section]:
+                if "learningRoadmap" not in item:
+                    item["learningRoadmap"] = []
+    return data
+
 # ✅ THEN DEFINE ROUTES
 @app.post("/analyze", response_model=ConsultantResponse)
 def analyze(request: ConsultantRequest):
-    try:
-        result = analyze_profile(request)
-        return result
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    result = analyze_profile(request)
+    normalized = normalize_response(result)
+    return normalized
+
