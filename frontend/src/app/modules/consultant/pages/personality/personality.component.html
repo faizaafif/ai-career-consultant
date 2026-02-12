@@ -1,0 +1,99 @@
+<h2>Let’s understand how you work</h2>
+
+<p class="subtitle">
+  These questions help match careers that fit your personality,
+  not just your skills.
+</p>
+
+<form [formGroup]="personalityForm">
+
+  <!-- WORK STYLE -->
+  <div class="question-block">
+    <label>How do you prefer working?</label>
+
+    <label class="option">
+      <input type="radio" value="team" formControlName="workStyle" />
+      Working in a team
+    </label>
+
+    <label class="option">
+      <input type="radio" value="independent" formControlName="workStyle" />
+      Working independently
+    </label>
+
+    <label class="option">
+      <input type="radio" value="hybrid" formControlName="workStyle" />
+      A mix of both
+    </label>
+
+    <div class="error"
+      *ngIf="personalityForm.get('workStyle')?.touched &&
+             personalityForm.get('workStyle')?.invalid">
+      Please choose a work style
+    </div>
+  </div>
+
+  <!-- RISK TOLERANCE -->
+  <div class="question-block">
+    <label>How comfortable are you with career risk?</label>
+
+    <label class="option">
+      <input type="radio" value="low" formControlName="riskTolerance" />
+      Prefer stability and predictability
+    </label>
+
+    <label class="option">
+      <input type="radio" value="medium" formControlName="riskTolerance" />
+      Comfortable with some uncertainty
+    </label>
+
+    <label class="option">
+      <input type="radio" value="high" formControlName="riskTolerance" />
+      Comfortable taking risks for growth
+    </label>
+
+    <div class="error"
+      *ngIf="personalityForm.get('riskTolerance')?.touched &&
+             personalityForm.get('riskTolerance')?.invalid">
+      Please select your risk tolerance
+    </div>
+  </div>
+
+  <!-- PROBLEM APPROACH -->
+  <div class="question-block">
+    <label>How do you usually approach problems?</label>
+
+    <label class="option">
+      <input type="radio" value="structured" formControlName="problemApproach" />
+      Step-by-step, structured approach
+    </label>
+
+    <label class="option">
+      <input type="radio" value="creative" formControlName="problemApproach" />
+      Creative and exploratory approach
+    </label>
+
+    <label class="option">
+      <input type="radio" value="adaptive" formControlName="problemApproach" />
+      Adapt based on the situation
+    </label>
+
+    <div class="error"
+      *ngIf="personalityForm.get('problemApproach')?.touched &&
+             personalityForm.get('problemApproach')?.invalid">
+      Please select a problem-solving style
+    </div>
+  </div>
+
+  <!-- ACTION BUTTONS -->
+  <div class="actions">
+    <button type="button" class="secondary" (click)="back()">
+      ← Back
+    </button>
+
+    <button type="button" class="primary" (click)="next()">
+      Next →
+    </button>
+  </div>
+
+</form>

@@ -1,0 +1,30 @@
+<h2>What genuinely interests you?</h2>
+
+<p class="subtitle">
+  Choose activities you enjoy or feel curious about.
+  This helps match careers you won’t burn out in.
+</p>
+
+<form [formGroup]="interestsForm">
+
+  <div class="options">
+    <label *ngFor="let interest of interestOptions">
+      <input
+        type="checkbox"
+        (change)="toggleInterest(interest)"
+      />
+      {{ interest }}
+    </label>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="secondary" (click)="back()">
+      ← Back
+    </button>
+
+    <button type="button" class="primary" (click)="next()">
+      Next →
+    </button>
+  </div>
+
+</form>

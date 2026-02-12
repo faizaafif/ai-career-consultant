@@ -1,0 +1,37 @@
+<h2>Review & Confirm</h2>
+
+<p class="subtitle">
+  I’ve gathered everything I need.  
+  When you’re ready, I’ll analyze your profile and recommend
+  the most suitable career path.
+</p>
+
+<div class="summary">
+  <p>This analysis will consider:</p>
+  <ul>
+    <li>Your background and education</li>
+    <li>Your skills and proficiency levels</li>
+    <li>Your interests and personality</li>
+    <li>Your real-life constraints</li>
+  </ul>
+</div>
+
+<div class="actions">
+  <button
+    type="button"
+    class="secondary"
+    (click)="back()"
+    [disabled]="loading"
+  >
+    ← Back
+  </button>
+
+  <button
+    type="button"
+    class="primary"
+    (click)="analyzeCareer()"
+    [disabled]="loading"
+  >
+    {{ loading ? 'Analyzing...' : 'Analyze My Career' }}
+  </button>
+</div>

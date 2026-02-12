@@ -1,0 +1,68 @@
+<h2>Let’s start with your background</h2>
+
+<p class="subtitle">
+  This helps me understand your academic foundation and experience level.
+</p>
+
+<form [formGroup]="backgroundForm">
+
+  <!-- EDUCATION LEVEL -->
+  <div class="question-block">
+    <label>Highest level of education completed</label>
+
+    <select formControlName="educationLevel">
+      <option value="">Select</option>
+      <option value="diploma">Diploma</option>
+      <option value="undergraduate">Undergraduate</option>
+      <option value="postgraduate">Postgraduate</option>
+      <option value="other">Other</option>
+    </select>
+
+    <div class="error" *ngIf="backgroundForm.get('educationLevel')?.touched && backgroundForm.get('educationLevel')?.invalid">
+      Please select your education level
+    </div>
+  </div>
+
+  <!-- FIELD OF STUDY -->
+  <div class="question-block">
+    <label>Field of study</label>
+
+    <select formControlName="fieldOfStudy">
+      <option value="">Select</option>
+      <option *ngFor="let field of fieldOfStudyOptions" [value]="field">{{ field }}</option>
+    </select>
+
+    <div class="error" *ngIf="backgroundForm.get('fieldOfStudy')?.touched && backgroundForm.get('fieldOfStudy')?.invalid">
+      Please select your field of study
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="question-block">
+    <label>Any work experience?</label>
+
+    <select formControlName="experience">
+      <option value="">Select</option>
+      <option value="none">No experience</option>
+      <option value="internship">Internship</option>
+      <option value="full-time">Full-time</option>
+      <option value="freelance">Freelance</option>
+    </select>
+
+    <div class="error" *ngIf="backgroundForm.get('experience')?.touched && backgroundForm.get('experience')?.invalid">
+      Please select your experience level
+    </div>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="actions">
+    <button type="button" class="secondary" (click)="back()">
+      ← Back
+    </button>
+
+    <button type="button" class="primary" (click)="next()">
+      Next →
+    </button>
+  </div>
+
+</form>

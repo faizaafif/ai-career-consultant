@@ -1,0 +1,69 @@
+<h2>Your Skill Set</h2>
+
+<p class="subtitle">
+  Select the skills you currently have and rate your proficiency.
+  This helps generate realistic career recommendations.
+</p>
+
+<form [formGroup]="skillsForm">
+
+  <!-- SKILL CHECKBOXES -->
+  <div class="skills-list">
+    <label
+      *ngFor="let skill of availableSkills"
+      class="skill-item"
+    >
+      <input
+        type="checkbox"
+        [checked]="isSkillSelected(skill)"
+        (change)="toggleSkill(skill)"
+      />
+      {{ skill }}
+    </label>
+  </div>
+
+  <!-- 🔑 IMPORTANT: FormArray binding -->
+  <div formArrayName="skills">
+
+    <div
+      class="level-section"
+      *ngFor="let skillCtrl of skillsArray.controls; let i = index"
+      [formGroupName]="i"
+    >
+      <strong>{{ skillCtrl.value.name }}</strong>
+
+      <select formControlName="level">
+        <option value="">Select proficiency</option>
+        <option
+          *ngFor="let level of proficiencyLevels"
+          [value]="level"
+        >
+          {{ level }}
+        </option>
+      </select>
+
+      <div
+        class="error"
+        *ngIf="
+          skillCtrl.get('level')?.touched &&
+          skillCtrl.get('level')?.invalid
+        "
+      >
+        Please select proficiency level
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ACTION BUTTONS -->
+  <div class="actions">
+    <button type="button" class="secondary" (click)="back()">
+      ← Back
+    </button>
+
+    <button type="button" class="primary" (click)="next()">
+      Next →
+    </button>
+  </div>
+
+</form>

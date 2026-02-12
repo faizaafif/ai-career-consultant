@@ -1,0 +1,31 @@
+.intro {
+  font-size: 1.05rem;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.info {
+  background-color: #f9fafb;
+  padding: 16px;
+  border-left: 4px solid #4f46e5;
+  margin-bottom: 20px;
+}
+
+.note {
+  font-style: italic;
+  color: #555;
+  margin-bottom: 24px;
+}
+
+button {
+  padding: 12px 20px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #4338ca;
+}

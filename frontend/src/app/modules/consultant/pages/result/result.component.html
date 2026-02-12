@@ -1,0 +1,38 @@
+<h1>Your Career Consultation Result</h1>
+
+<p class="intro">
+  Based on everything you shared, here is my honest assessment.
+  This recommendation considers your background, skills,
+  interests, personality, and constraints.
+</p>
+
+<!-- CONFIDENCE -->
+<div class="confidence" *ngIf="analysisText">
+  {{ confidenceLabel }}
+</div>
+
+<!-- AI RESULT -->
+<div class="report" *ngIf="analysisText; else loading">
+  <pre>{{ analysisText }}</pre>
+</div>
+
+<!-- LOADING STATE -->
+<ng-template #loading>
+  <div class="report loading">
+    Finalizing your career recommendation…
+  </div>
+</ng-template>
+
+<hr />
+
+<!-- ACTION PLAN -->
+<h3>What You Should Do Next</h3>
+<ul>
+  <li>Start building the skills mentioned above</li>
+  <li>Look for internships or entry-level opportunities</li>
+  <li>Revisit this consultation after 3-6 months</li>
+</ul>
+
+<button class="restart" (click)="restart()">
+  Start New Consultation
+</button>
