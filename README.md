@@ -68,7 +68,7 @@ cd backend
 npm install
 npm run dev
 ```
-The Backend API will run on `http://localhost:3000` (or another port specified in its configuration).
+The Backend API will run on `http://localhost:5000` (or another port specified in its configuration).
 
 ### 3. Frontend Application Setup
 
