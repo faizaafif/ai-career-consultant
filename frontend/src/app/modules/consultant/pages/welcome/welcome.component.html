@@ -1,24 +1,35 @@
-<h1>Welcome to CareerCompass</h1>
+<div class="container consultant-step">
+  <div class="card step-card">
 
-<p class="intro">
-  I’ll guide you through a short conversation — just like a
-  professional career consultant would.
-</p>
+    <header class="step-header">
+      <div class="step-eyebrow">AI Career Consultant</div>
+      <h1>Welcome to CareerCompass</h1>
+      <p class="intro">
+        I’ll guide you through a short, structured conversation — similar to meeting a professional career consultant.
+      </p>
+    </header>
 
-<div class="info">
-  <p>In the next few minutes, we’ll discuss:</p>
-  <ul>
-    <li>Your background and education</li>
-    <li>Your skills and interests</li>
-    <li>Your work style and preferences</li>
-    <li>Your real-life constraints</li>
-  </ul>
+    <section class="info">
+      <p class="subtitle">
+        Over the next few minutes, we’ll explore:
+      </p>
+      <ul>
+        <li>Your background and education</li>
+        <li>Your skills and interests</li>
+        <li>Your work style and personality</li>
+        <li>Your real-life constraints</li>
+      </ul>
+    </section>
+
+    <p class="note">
+      There are no right or wrong answers — the more honest you are, the more useful the recommendations will be.
+    </p>
+
+    <div class="actions">
+      <button class="primary" type="button" (click)="startConsultation()">
+        Start consultation →
+      </button>
+    </div>
+
+  </div>
 </div>
-
-<p class="note">
-  There are no right or wrong answers. Be honest.
-</p>
-
-<button (click)="startConsultation()">
-  Start Consultation →
-</button>

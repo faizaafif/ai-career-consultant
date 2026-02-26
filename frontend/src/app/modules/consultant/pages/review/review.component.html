@@ -1,37 +1,43 @@
-<h2>Review & Confirm</h2>
+<div class="container consultant-step">
+  <div class="card step-card">
 
-<p class="subtitle">
-  I’ve gathered everything I need.  
-  When you’re ready, I’ll analyze your profile and recommend
-  the most suitable career path.
-</p>
+    <header class="step-header">
+      <div class="step-eyebrow">Step 6 · Review</div>
+      <h2>Review & confirm</h2>
+      <p class="subtitle">
+        I’ve gathered everything I need. When you’re ready, I’ll analyze your profile and recommend the most suitable career paths.
+      </p>
+    </header>
 
-<div class="summary">
-  <p>This analysis will consider:</p>
-  <ul>
-    <li>Your background and education</li>
-    <li>Your skills and proficiency levels</li>
-    <li>Your interests and personality</li>
-    <li>Your real-life constraints</li>
-  </ul>
-</div>
+    <div class="summary">
+      <p>This analysis will consider:</p>
+      <ul>
+        <li>Your background and education</li>
+        <li>Your skills and proficiency levels</li>
+        <li>Your interests and personality</li>
+        <li>Your real-life constraints</li>
+      </ul>
+    </div>
 
-<div class="actions">
-  <button
-    type="button"
-    class="secondary"
-    (click)="back()"
-    [disabled]="loading"
-  >
-    ← Back
-  </button>
+    <div class="actions">
+      <button
+        type="button"
+        class="secondary"
+        (click)="back()"
+        [disabled]="loading"
+      >
+        ← Back
+      </button>
 
-  <button
-    type="button"
-    class="primary"
-    (click)="analyzeCareer()"
-    [disabled]="loading"
-  >
-    {{ loading ? 'Analyzing...' : 'Analyze My Career' }}
-  </button>
+      <button
+        type="button"
+        class="primary"
+        (click)="analyzeCareer()"
+        [disabled]="loading"
+      >
+        {{ loading ? 'Analyzing…' : 'Analyze my career' }}
+      </button>
+    </div>
+
+  </div>
 </div>

@@ -190,6 +190,59 @@ button:disabled {
   padding: var(--spacing-xl);
 }
 
+/* Consultant flow shared layout */
+
+.consultant-step .step-card {
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.consultant-step .step-header {
+  margin-bottom: var(--spacing-lg);
+}
+
+.consultant-step .step-eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-500);
+  margin-bottom: var(--spacing-xs);
+}
+
+.consultant-step .subtitle {
+  margin-top: var(--spacing-xs);
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-500);
+  font-size: 0.95rem;
+}
+
+.consultant-step .question-block {
+  margin-bottom: var(--spacing-lg);
+}
+
+.consultant-step label {
+  display: block;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-700);
+}
+
+.consultant-step .error {
+  color: var(--error-500);
+  font-size: 0.85rem;
+  margin-top: var(--spacing-xs);
+}
+
+.consultant-step .actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-xl);
+  flex-wrap: wrap;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   h1 { font-size: 1.875rem; }

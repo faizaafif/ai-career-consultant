@@ -20,6 +20,21 @@ class ConsultantRequest(BaseModel):
     constraints: Optional[dict] = None
 
 
+class ChatMessage(BaseModel):
+    role: str  # "user" | "assistant"
+    content: str
+
+
+class ChatRequest(BaseModel):
+    profile: Optional[ConsultantRequest] = None
+    analysisResult: Optional[dict] = None
+    messages: List[ChatMessage]
+
+
+class ChatResponse(BaseModel):
+    reply: str
+
+
 class CareerRecommendation(BaseModel):
     title: str
     confidence: float

@@ -4,9 +4,11 @@ from fastapi.responses import JSONResponse
 
 from schemas.consultant_schema import (
     ConsultantRequest,
-    ConsultantResponse
+    ConsultantResponse,
+    ChatRequest,
+    ChatResponse,
 )
-from services.gemini_ai_service import analyze_profile
+from services.gemini_ai_service import analyze_profile, chat_with_consultant
 
 # ✅ CREATE APP FIRST
 app = FastAPI(title="AI Career Consultant - Gemini")
@@ -33,4 +35,18 @@ def analyze(request: ConsultantRequest):
     result = analyze_profile(request)
     normalized = normalize_response(result)
     return normalized
+
+
+@app.post("/chat", response_model=ChatResponse)
+def chat(request: ChatRequest):
+    """
+    Lightweight chat endpoint to answer follow-up questions
+    based on the student's profile, previous analysis, and
+    the ongoing conversation history.
+    """
+    try:
+        reply = chat_with_consultant(request)
+        return ChatResponse(reply=reply)
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=str(exc))
 

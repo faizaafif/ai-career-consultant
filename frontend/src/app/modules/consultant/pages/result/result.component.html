@@ -1,57 +1,154 @@
-<h1>Your Career Consultation Result</h1>
+<div class="container">
+  <div class="card result-card" *ngIf="!loading; else loadingTemplate">
 
-<p class="intro">
-  Based on everything you shared, here is the structured recommendation.
-</p>
+    <header class="result-header">
+      <div class="result-eyebrow">AI Career Consultant</div>
+      <h1>Your personalized career roadmap</h1>
+      <p class="intro">
+        Based on everything you shared, here is a prioritized set of career paths and concrete next steps tailored to you.
+      </p>
+    </header>
 
-<div *ngIf="!loading; else loadingTemplate">
+    <div class="result-grid">
+      <section class="result-main">
+        <!-- TOP CAREERS -->
+        <h2 class="section-title">Top career matches</h2>
+        <p class="section-subtitle">
+          Primary options that best align with your skills, interests, and constraints.
+        </p>
 
-  <!-- TOP CAREERS -->
-  <h2>Top Career Matches</h2>
-  <div *ngFor="let career of resultData?.topCareers">
-    <h3>{{ career.title }}</h3>
-    <p><strong>Confidence:</strong> {{ career.confidence }}</p>
-    <p>{{ career.reasoning }}</p>
+        <div
+          class="career-card"
+          *ngFor="let career of resultData?.topCareers; let i = index"
+        >
+          <div class="career-header">
+            <div>
+              <h3>{{ career.title }}</h3>
+              <p class="career-index">Recommendation {{ i + 1 }}</p>
+            </div>
+            <div class="career-confidence-badge">
+              <span class="label">Confidence</span>
+              <span class="value">{{ career.confidence | number: '1.0-2' }}</span>
+            </div>
+          </div>
 
-    <ul>
-      <li *ngFor="let step of career.learningRoadmap">
-        {{ step }}
-      </li>
-    </ul>
+          <p class="career-reasoning">
+            {{ career.reasoning }}
+          </p>
 
-    <hr />
+          <div *ngIf="career.learningRoadmap?.length" class="career-roadmap">
+            <h4>Suggested learning roadmap</h4>
+            <ol>
+              <li *ngFor="let step of career.learningRoadmap">
+                {{ step }}
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- ALTERNATIVES -->
+        <section class="section-block" *ngIf="resultData?.alternatives?.length">
+          <h2 class="section-title">Alternative options</h2>
+          <p class="section-subtitle">
+            Related directions you could explore if your primary choices change over time.
+          </p>
+
+          <div class="alternative-list">
+            <div *ngFor="let alt of resultData?.alternatives" class="alternative-card">
+              <h4>{{ alt.title }}</h4>
+              <p>{{ alt.reasoning }}</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- REJECTED -->
+        <section class="section-block" *ngIf="resultData?.rejectedOptions?.length">
+          <h2 class="section-title">Why some paths were not recommended</h2>
+          <p class="section-subtitle">
+            Understanding what was deprioritized can help you make clearer decisions.
+          </p>
+
+          <ul class="rejected-list">
+            <li *ngFor="let reject of resultData?.rejectedOptions">
+              <strong>{{ reject.career }}</strong>
+              <span class="separator">•</span>
+              <span>{{ reject.reason }}</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- NEXT STEPS -->
+        <section class="section-block">
+          <h2 class="section-title">Suggested next steps</h2>
+          <p class="section-subtitle">
+            Use these as a practical starting point over the next 3–6 months.
+          </p>
+          <ul class="next-steps-list">
+            <li>Start building the recommended skills with 1–2 focused learning resources.</li>
+            <li>Look for internships, projects, or entry-level opportunities in your top matches.</li>
+            <li>Re-evaluate your direction after gaining hands-on experience and feedback.</li>
+          </ul>
+
+          <button class="secondary restart-button" type="button" (click)="restart()">
+            Start a new consultation
+          </button>
+        </section>
+      </section>
+
+      <!-- CHATBOT SECTION -->
+      <section class="result-chat">
+        <div class="chat-wrapper">
+          <h2 class="section-title">Chat with your consultant</h2>
+          <p class="section-subtitle">
+            Ask follow-up questions, clarify trade-offs, or explore "what-if" scenarios.
+          </p>
+
+          <div class="chat-window">
+            <div
+              *ngFor="let msg of chatMessages"
+              class="chat-message"
+              [ngClass]="msg.role"
+            >
+              <div class="bubble">
+                <div class="meta">
+                  <span class="author" *ngIf="msg.role === 'assistant'">Consultant</span>
+                  <span class="author" *ngIf="msg.role === 'user'">You</span>
+                </div>
+                <p class="text">
+                  {{ msg.content }}
+                </p>
+              </div>
+            </div>
+
+            <div *ngIf="chatMessages.length === 0" class="chat-empty">
+              Ask any question you have about these recommendations.
+            </div>
+          </div>
+
+          <div class="chat-input-row">
+            <textarea
+              [(ngModel)]="userMessage"
+              rows="3"
+              placeholder="For example: “How do these paths differ day-to-day?” or “What if I want to work remotely?”"
+            ></textarea>
+
+            <button
+              class="primary"
+              type="button"
+              (click)="askQuestion()"
+              [disabled]="sending || !userMessage.trim()"
+            >
+              {{ sending ? 'Asking…' : 'Ask the consultant' }}
+            </button>
+          </div>
+
+          <p class="chat-error" *ngIf="chatError">
+            {{ chatError }}
+          </p>
+        </div>
+      </section>
+    </div>
   </div>
-
-  <!-- ALTERNATIVES -->
-  <h2>Alternative Options</h2>
-  <div *ngFor="let alt of resultData?.alternatives">
-    <h4>{{ alt.title }}</h4>
-    <p>{{ alt.reasoning }}</p>
-  </div>
-
-  <hr />
-
-  <!-- REJECTED -->
-  <h2>Why Some Paths Were Rejected</h2>
-  <div *ngFor="let reject of resultData?.rejectedOptions">
-    <p>
-      <strong>{{ reject.career }}</strong> — {{ reject.reason }}
-    </p>
-  </div>
-
-  <hr />
-
-  <h3>What You Should Do Next</h3>
-  <ul>
-    <li>Start building the recommended skills</li>
-    <li>Look for internships or entry-level opportunities</li>
-    <li>Re-evaluate after gaining experience</li>
-  </ul>
-
-  <button class="primary" (click)="restart()">
-    Start New Consultation
-  </button>
-
 </div>
 
 <ng-template #loadingTemplate>

@@ -1,30 +1,36 @@
-<h2>What genuinely interests you?</h2>
+<div class="container consultant-step">
+  <div class="card step-card">
 
-<p class="subtitle">
-  Choose activities you enjoy or feel curious about.
-  This helps match careers you won’t burn out in.
-</p>
+    <header class="step-header">
+      <div class="step-eyebrow">Step 3 · Interests</div>
+      <h2>What genuinely interests you?</h2>
+      <p class="subtitle">
+        Choose activities you enjoy or feel curious about. This helps match you with careers you’re more likely to enjoy long-term.
+      </p>
+    </header>
 
-<form [formGroup]="interestsForm">
+    <form [formGroup]="interestsForm">
 
-  <div class="options">
-    <label *ngFor="let interest of interestOptions">
-      <input
-        type="checkbox"
-        (change)="toggleInterest(interest)"
-      />
-      {{ interest }}
-    </label>
+      <div class="options">
+        <label *ngFor="let interest of interestOptions">
+          <input
+            type="checkbox"
+            (change)="toggleInterest(interest)"
+          />
+          {{ interest }}
+        </label>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="secondary" (click)="back()">
+          ← Back
+        </button>
+
+        <button type="button" class="primary" (click)="next()">
+          Next →
+        </button>
+      </div>
+
+    </form>
   </div>
-
-  <div class="actions">
-    <button type="button" class="secondary" (click)="back()">
-      ← Back
-    </button>
-
-    <button type="button" class="primary" (click)="next()">
-      Next →
-    </button>
-  </div>
-
-</form>
+</div>

@@ -54,6 +54,7 @@ Navigate to the `ai-service` directory, install dependencies, and start the serv
 
 ```bash
 cd ai-service
+.\venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn main:app --reload --port 8000
 ```
@@ -75,7 +76,7 @@ The Backend API will run on `http://localhost:5000` (or another port specified i
 Navigate to the `frontend` directory, install dependencies, and start the Angular development server.
 
 ```bash
-cd frontend
+cd frontend 
 npm install
 ng serve
 ```
